@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ЭлектроТранспорт — журнал об электромобилях, электробусах и самокатах</title>
+  <meta name="description" content="Самостоятельный журнал об электротранспорте: статьи, фото, видео, калькулятор экономии и сравнение электромобилей с бензиновыми. Автономный сайт без сервера." />
+  <meta property="og:title" content="ЭлектроТранспорт — всё об электротранспорте" />
+  <meta property="og:description" content="Уникальные статьи, живые фото и видео об электромобилях, электробусах, самокатах и зарядных сетях." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="progress" id="progressBar"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#home">
+        <span class="logo-badge">⚡</span>
+        <span>ЭлектроТранспорт<small id="logoTagline">журнал об электротранспорте</small></span>
+      </a>
+      <nav class="nav" id="mainNav">
+        <a href="#home">Главная</a>
+        <a href="#directions">Направления</a>
+        <a href="#articles">Статьи</a>
+        <a href="#calculator">Калькулятор</a>
+        <a href="#gallery">Фото</a>
+        <a href="#video">Видео</a>
+        <a href="#faq">Вопросы</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-btn" href="admin.html" title="Админ-панель (реклама)" aria-label="Админ-панель">🛠</a>
+        <button class="icon-btn" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">🌙</button>
+        <button class="icon-btn burger" id="burger" aria-label="Меню">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-glow"></div>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="reveal">
+            <span class="pill"><i></i><span id="heroBadge">Обновляется регулярно</span></span>
+            <h1 id="heroTitle"></h1>
+            <p class="lead" id="heroSubtitle"></p>
+            <div class="hero-cta">
+              <a class="btn btn-primary" id="heroCta1" href="#articles">Читать статьи</a>
+              <a class="btn btn-ghost" id="heroCta2" href="#video">Смотреть видео</a>
+            </div>
+          </div>
+          <figure class="hero-media reveal" style="margin:0">
+            <img id="heroImage" alt="Электромобиль" />
+            <figcaption id="heroCaption"></figcaption>
+          </figure>
+        </div>
+        <div class="stats" id="statsGrid"></div>
+      </div>
+    </section>
+
+    <div class="container"><div class="ad-zone" data-zone="leaderboard"></div></div>
+
+    <section id="directions">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">Разделы сайта</div>
+            <h2>Шесть направлений электротранспорта</h2>
+            <p>Каждый раздел наполняется уникальными материалами: от технических разборов до городских кейсов.</p>
+          </div>
+        </div>
+        <div class="dir-grid" id="directionsGrid"></div>
+      </div>
+    </section>
+    <div class="container">
+      <div class="content-layout">
+        <div class="main-col">
+          <section id="articles" style="padding-top:10px">
+            <div class="section-head reveal">
+              <div>
+                <div class="kicker">База знаний</div>
+                <h2>Статьи и обзоры</h2>
+                <p>Полные материалы с уникальным текстом — открываются прямо на странице.</p>
+              </div>
+            </div>
+            <div class="toolbar">
+              <div class="search-box">
+                <input type="search" id="searchInput" placeholder="Поиск по статьям, тегам…" aria-label="Поиск по статьям" />
+              </div>
+              <div class="chips" id="filterChips"></div>
+            </div>
+            <div class="articles-grid" id="articlesGrid"></div>
+            <div class="ad-zone" data-zone="feed"></div>
+          </section>
+
+          <section id="calculator">
+            <div class="section-head reveal">
+              <div>
+                <div class="kicker">Интерактив</div>
+                <h2>Калькулятор экономии: EV против бензина</h2>
+                <p>Введите свои цифры — сервис мгновенно посчитает годовые затраты, разницу и углеродный след.</p>
+              </div>
+            </div>
+            <div class="calc-grid reveal">
+              <form class="calc-form" id="calcForm" onsubmit="return false">
+                <div class="field"><label>Пробег в год, км <b id="lblDistance"></b></label><input type="number" id="inDistance" min="0" step="500" /></div>
+                <div class="field"><label>Расход бензина, л/100 км <b id="lblFuelUse"></b></label><input type="number" id="inFuelUse" min="0" step="0.1" /></div>
+                <div class="field"><label>Цена бензина, ₽/л <b id="lblFuelPrice"></b></label><input type="number" id="inFuelPrice" min="0" step="1" /></div>
+                <div class="field"><label>Расход электрокара, кВт·ч/100 км <b id="lblPowerUse"></b></label><input type="number" id="inPowerUse" min="0" step="0.5" /></div>
+                <div class="field"><label>Цена электроэнергии, ₽/кВт·ч <b id="lblPowerPrice"></b></label><input type="number" id="inPowerPrice" min="0" step="0.1" /></div>
+              </form>
+              <div class="calc-result" id="calcResult"></div>
+            </div>
+          </section>
+
+          <section id="compare">
+            <div class="section-head reveal">
+              <div><div class="kicker">Факты</div><h2>Электромобиль против бензинового</h2></div>
+            </div>
+            <div class="table-wrap reveal">
+              <table>
+                <thead id="compareHead"></thead>
+                <tbody id="compareBody"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="faq">
+            <div class="section-head reveal">
+              <div><div class="kicker">Вопросы и ответы</div><h2>Частые вопросы об электротранспорте</h2></div>
+            </div>
+            <div class="faq-list" id="faqList"></div>
+          </section>
+        </div>
+
+        <aside class="side-col">
+          <div class="ad-zone sidebar-zone" data-zone="sidebar"></div>
+          <div class="widget reveal">
+            <h3>📰 Новости и факты</h3>
+            <div id="newsList"></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+    <section id="gallery">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">Фото</div>
+            <h2>Галерея электротранспорта</h2>
+            <p>Свободные фотографии Wikimedia Commons — откройте любую для полноэкранного просмотра.</p>
+          </div>
+        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+      </div>
+    </section>
+
+    <section id="video">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">Видео</div>
+            <h2>Видеоархив</h2>
+            <p>Ролики с Wikimedia Commons: устройство EV, зарядные станции, электробусы. Воспроизведение прямо на странице.</p>
+          </div>
+        </div>
+        <div class="video-grid" id="videoGrid"></div>
+      </div>
+    </section>
+
+    <div class="container"><div class="ad-zone" data-zone="prefooter"></div></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="#home"><span class="logo-badge">⚡</span><span>ЭлектроТранспорт</span></a>
+          <p class="footer-note" style="margin-top:12px">Автономный статический сайт: весь контент хранится локально в <code>js/data.js</code>, работает без сервера и аналитики.</p>
+        </div>
+        <div>
+          <h4>Разделы</h4>
+          <ul>
+            <li><a href="#articles">Статьи</a></li>
+            <li><a href="#calculator">Калькулятор</a></li>
+            <li><a href="#gallery">Галерея</a></li>
+            <li><a href="#video">Видео</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Администрирование</h4>
+          <ul>
+            <li><a href="admin.html">Админ-панель (реклама)</a></li>
+            <li><a href="README.md">Инструкция</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Контент</h4>
+          <p class="footer-note">Фото и видео — Wikimedia Commons, лицензии CC BY-SA / CC BY / общественное достояние. Тексты — авторские.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> ЭлектроТранспорт. Все права на тексты сохраняются.</span>
+        <span>Сделано как автономный статический сайт ⚡</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal" id="articleModal" role="dialog" aria-modal="true">
+    <article class="modal-card">
+      <div class="cover">
+        <img id="modalImage" alt="" />
+        <button class="modal-close" id="modalClose" aria-label="Закрыть">✕</button>
+      </div>
+      <div class="content" id="modalContent"></div>
+    </article>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" id="lbClose" aria-label="Закрыть">✕</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Назад">‹</button>
+    <div style="text-align:center">
+      <img id="lbImage" alt="" />
+      <div class="lb-caption" id="lbCaption"></div>
+    </div>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Вперёд">›</button>
+  </div>
+
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-card">
+      <button class="modal-close" id="popupClose" style="top:10px;right:10px" aria-label="Закрыть">✕</button>
+      <div id="popupContent"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <button class="to-top" id="toTop" aria-label="Наверх">↑</button>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/ads.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
